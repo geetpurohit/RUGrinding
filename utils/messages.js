@@ -6,6 +6,6 @@ function formatMessage(firstname, text){
         text,
         time: moment().tz('America/New_York').format('h:mm a')
     }
-}
+} 
 
 module.exports = formatMessage;
