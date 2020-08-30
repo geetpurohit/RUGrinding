@@ -27,7 +27,7 @@ app.get('/:room', (req, res) => {
 
 
 // Socket.io configuration 
-const botName = 'ChatCord Bot';
+const botName = 'RUBot';
 // Client listener
 io.on('connection', socket => {
     // Connor's
