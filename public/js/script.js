@@ -29,6 +29,7 @@ navigator.mediaDevices.getUserMedia({
 })
 
 socket.on('user-disconnected', userId => {
+  console.log('User disconnected.')
   if (peers[userId]) peers[userId].close()
 })
 
