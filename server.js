@@ -31,12 +31,13 @@ io.on('connection', socket => {
             
             // Change their room ids for users[] 
             // send welcome messages
+            
             p1_name = user['user'].firstname;
             p2_name = user['peer'].firstname;
 
             user['user'].room = uuid;
             user['peer'].room = uuid;
-            
+
             socket.emit('wakeup', p2_name);
             io.sockets.connected[user['peer'].id].emit('wakeup', p1_name);
         }
