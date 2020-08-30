@@ -16,10 +16,31 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+// Connor's
+app.get('/test', (req, res) => {
+    res.redirect(`/${id.v4()}`)
+})
+
+app.get('/:room', (req, res) => {
+    res.render('room', { roomId: req.params.room })
+})
+
+
 // Socket.io configuration 
 const botName = 'ChatCord Bot';
 // Client listener
 io.on('connection', socket => {
+    // Connor's
+    socket.on('join-room', (roomId, userId) => {
+        socket.join(roomId)
+        socket.to(roomId).broadcast.emit('user-connected', userId)
+
+        socket.on('disconnect', () => {
+            socket.to(roomId).broadcast.emit('user-disconnected', userId)
+        })
+    })
+
+
     socket.on('joinWaitRoom', (firstname) => {
         const user = userJoinWait(socket.id, firstname);
         // If user is two users, socket.join() both of them to a unique room
@@ -48,8 +69,14 @@ io.on('connection', socket => {
     // Listen for chatMessage
     socket.on('chatMessage', (msg) => {
         const user = getCurrentUser(socket.id);
-
-        io.to(user.room).emit('message', formatMessage(user.firstname, msg));
+        // user has not connected with a person yet
+        if (user === undefined){
+            socket.emit('type_error');
+        }
+        else{
+            io.to(user.room).emit('message', formatMessage(user.firstname, msg));
+        }
+        
     });
     
   
@@ -68,7 +95,7 @@ io.on('connection', socket => {
         
     });
 
-})
+})  
 
 let port = process.env.PORT || 5000;
 server.listen(port, () => {

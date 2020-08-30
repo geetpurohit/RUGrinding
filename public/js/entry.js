@@ -18,10 +18,15 @@ socket.on('wakeup', (name) => {
     changeHeader(name);
 });
 
+socket.on('type_error', () => {
+    header.innerHTML = 'Must wait for a person to connect to start typing!';
+});
+
 
 function changeHeader(firstname){
     header.innerHTML = `${firstname} connected!`;
 }
+
 
 // Geet's
 // Get room and users
