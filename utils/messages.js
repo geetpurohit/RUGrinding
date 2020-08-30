@@ -2,7 +2,7 @@ const moment = require('moment-timezone');
 
 function formatMessage(username, text){
     return {
-        username,
+        firstname,
         text,
         time: moment().tz('America/New_York').format('h:mm a')
     }
