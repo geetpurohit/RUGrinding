@@ -31,7 +31,7 @@ io.on('connection', socket => {
             
             // Change their room ids for users[] 
             // send welcome messages
-            
+
             p1_name = user['user'].firstname;
             p2_name = user['peer'].firstname;
 
@@ -71,8 +71,7 @@ io.on('connection', socket => {
 })
 
 
-let port = 3000;
-server.listen(port, () => {
+server.listen(process.env.PORT || 5000, () => {
     console.log(`Listening on port ${port}`);
     console.log('Hello world!')
 });
