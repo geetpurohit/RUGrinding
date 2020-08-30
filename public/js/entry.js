@@ -63,7 +63,7 @@ socket.on('roomUsers', ({ room, users }) => {
   function outputMessage(message) {
     const div = document.createElement('div');
     div.classList.add('message');
-    div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
+    div.innerHTML = `<p class="meta">${message.firstname} <span>${message.time}</span></p>
     <p class="text">
       ${message.text}
     </p>`;
@@ -78,6 +78,6 @@ socket.on('roomUsers', ({ room, users }) => {
   // Add users to DOM
   function outputUsers(users) {
     userList.innerHTML = `
-      ${users.map(user => `<li>${user.username}</li>`).join('')}
+      ${users.map(user => `<li>${user.firstname}</li>`).join('')}
     `;
   }
