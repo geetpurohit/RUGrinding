@@ -1,6 +1,6 @@
 const moment = require('moment-timezone');
 
-function formatMessage(username, text){
+function formatMessage(firstname, text){
     return {
         firstname,
         text,
